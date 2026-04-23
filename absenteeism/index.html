@@ -843,7 +843,7 @@ function renderDistrictCard(d) {
         <div>
           <h3 class="districtName">${d.name}</h3>
           <p class="districtSub">Use this card as a quick district level profile for review and discussion.</p>
-         <div class="districtChips">
+       <div class="districtChips">
   <div class="chip chipNavy">Enrollment: ${fmtInt(d.enrollment)}</div>
   <div class="chip chipChange ${Number(String(d.change).replace(/[^0-9.-]/g,'')) > 0 ? 'up' : Number(String(d.change).replace(/[^0-9.-]/g,'')) < 0 ? 'down' : ''}">
     ${fmtChange(d.change)}
