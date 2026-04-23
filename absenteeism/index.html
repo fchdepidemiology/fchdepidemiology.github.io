@@ -217,8 +217,8 @@ h1 {
   font-size: 14px;
 }
 .chipNavy { background: #e9eef8; color: var(--navy); }
-.chipGold { background: var(--goldSoft); color: #7b5710; }
-.chipRed { background: var(--redSoft); color: #8f3040; }
+.chipGold { background: #f1f3f6;; color: #7b5710; }
+.chipRed { background: #f3e9ea; color: #8f3040; }
 .miniPanel {
   background: #f7f9fc;
   border: 1px solid var(--line);
@@ -829,7 +829,7 @@ function renderDistrictCard(d) {
           <div class="districtChips">
             <div class="chip chipNavy">Enrollment ${fmtInt(d.enrollment)}</div>
             <div class="chip chipGold">${fmtChange(d.change)}</div>
-            <div class="chip chipRed">Superintendent ${d.superintendent}</div>
+            <div class="chip chipRed">Superintendent: ${d.superintendent}</div>
           </div>
         </div>
         <div class="miniPanel">
