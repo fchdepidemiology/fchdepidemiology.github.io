@@ -645,7 +645,7 @@ document.getElementById("districtGrid").innerHTML = districts.map((d, i) => `
       <div class="miniPanel">
         <div class="miniTitle">Current chronic absenteeism</div>
         <div class="bigStat">${fmtPct(d.chronic)}</div>
-        <div class="bigStatNote">County chronic absenteeism is ${fmtPct(weightedChronic)}. This district is ${Number(d.chronic) >= weightedChronic ? 'at or above' : 'below'} the weighted county level.</div>
+        <div class="bigStatNote">County chronic absenteeism is ${fmtPct(stats.weightedChronic)}. This district is ${Number(d.chronic) >= stats.weightedChronic ? 'at or above' : 'below'} the weighted county level.</div>
         <div class="stackedBar" aria-label="Attendance mix for ${d.name}" style="margin-top:18px;">
           <div class="seg1" style="width:${d.satisfactory}%" title="Satisfactory ${fmtPct(d.satisfactory)}"></div>
           <div class="seg2" style="width:${d.atRisk}%" title="At risk ${fmtPct(d.atRisk)}"></div>
@@ -679,6 +679,8 @@ document.getElementById("districtGrid").innerHTML = districts.map((d, i) => `
     </div>
   </div>
 `).join("");
+
+  
 </script>
 </body>
 </html>
