@@ -397,28 +397,26 @@ h1 {
 }
 
 .cardInfoIcon {
-  position: absolute;
-  top: 10px;
-  right: 12px;
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   border: 2px solid #0b3367;
   border-radius: 50%;
   color: #0b3367;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   background: transparent;
+  line-height: 1;
 }
 
 .cardTooltip {
   visibility: hidden;
   position: absolute;
-  top: -5px;
-  right: 30px;
+  top: 0;
+  right: 28px;
   width: 240px;
   background: #0b3367;
   color: #fff;
@@ -434,6 +432,18 @@ h1 {
   visibility: visible;
 }
 
+.cardInfoWrap:hover .cardTooltip {
+  visibility: visible;
+}
+.glanceCard {
+  position: relative;
+}
+
+.cardInfoWrap {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
   
 </style>
 </head>
