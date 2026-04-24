@@ -1,1 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fairfield County Tobacco Retail Surveillance Map</title>
 
+<style>
+:root {
+  --navy: #0b3367;
+  --gold: #d0b587;
+  --goldSoft: #efe4d1;
+  --ink: #16253a;
+  --panel: #ffffff;
+  --line: #d8e0ec;
+  --bg: #f5f7fb;
+  --blueSoft: #e8eef8;
+  --greenSoft: #e3efe9;
+  --shadow: 0 10px 28px rgba(11, 51, 103, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(208, 181, 135, 0.18), transparent 28%),
+    linear-gradient(180deg, #eef3f9 0%, #f7f9fc 45%, #f6f8fb 100%);
+}
+
+.container {
+  width: min(1220px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.hero {
+  padding: 28px 0 18px;
+}
+
+.heroCard {
+  background: linear-gradient(135deg, rgba(11, 51, 103, 0.98), rgba(18, 63, 127, 0.97));
+  color: #ffffff;
+  border-radius: 28px;
+  box-shadow: var(--shadow);
+  padding: 30px;
+}
+
+.kicker {
+  display: inline-block;
+  background: rgba(255,255,255,0.14);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+h1 {
+  font-size: clamp(36px, 5vw, 58px);
+  line-height: 1;
+  margin: 0 0 14px;
+  font-weight: 800;
+}
+
+.heroSub {
+  font-size: 18px;
+  line-height: 1.55;
+  max-width: 900px;
+  margin: 0;
+  color: rgba(255,255,255,0.94);
+}
+
+.metricRow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 22px;
+}
+
+.metric {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 18px;
+  padding: 16px 18px;
+}
+
+.metricLabel {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  opacity: 0.84;
+  margin-bottom: 8px;
+}
+
+.metricValue {
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.metricNote {
+  font-size: 14px;
+  margin-top: 6px;
+  color: rgba(255,255,255,0.9);
+}
+
+.section {
+  padding: 18px 0;
+}
+
+.gridTwo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  padding: 22px;
+}
+
+.panel h2 {
+  margin: 0 0 8px;
+  font-size: clamp(28px, 3vw, 40px);
+  color: var(--navy);
+}
+
+.panelIntro {
+  margin: 0 0 16px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #40506b;
+}
+
+.calloutGrid {
+  display: grid;
+  gap: 14px;
+}
+
+.callout {
+  border-radius: 18px;
+  padding: 18px;
+  line-height: 1.55;
+}
+
+.callout strong {
+  display: block;
+  color: var(--navy);
+  margin-bottom: 6px;
+  font-size: 18px;
+}
+
+.callout p {
+  margin: 0;
+}
+
+.calloutOne {
+  background: var(--goldSoft);
+}
+
+.calloutTwo {
+  background: var(--blueSoft);
+}
+
+.calloutThree {
+  background: var(--greenSoft);
+}
+
+.mapPanel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  padding: 18px;
+  overflow: hidden;
+}
+
+.mapFrame {
+  width: 100%;
+  height: 620px;
+  border: 0;
+  border-radius: 18px;
+  display: block;
+}
+
+.legendRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #f4f6fa;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 9px 12px;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dotBlue {
+  background: #17206d;
+}
+
+.dotGold {
+  background: #f4b02f;
+}
+
+.footer {
+  padding: 16px 0 34px;
+}
+
+.footerCard {
+  background: #ebf0f7;
+  border: 1px solid #d7e0ee;
+  border-radius: 20px;
+  padding: 18px 20px;
+  color: #40506b;
+  line-height: 1.6;
+}
+
+.noteTitle {
+  font-weight: 800;
+  color: var(--navy);
+  display: block;
+  margin-bottom: 6px;
+}
+
+@media (max-width: 900px) {
+  .metricRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gridTwo {
+    grid-template-columns: 1fr;
+  }
+
+  .mapFrame {
+    height: 520px;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    width: min(100% - 18px, 1220px);
+  }
+
+  .heroCard,
+  .panel,
+  .mapPanel {
+    border-radius: 20px;
+    padding: 18px;
+  }
+
+  .metricRow {
+    grid-template-columns: 1fr;
+  }
+
+  .mapFrame {
+    height: 460px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="hero">
+  <div class="container">
+    <div class="heroCard">
+      <div class="kicker">Fairfield County Health Department</div>
+      <h1>Tobacco Retail Surveillance Map</h1>
+      <p class="heroSub">
+        This page provides a visual summary of tobacco compliance check locations and store audit locations across Fairfield County. The map can support planning, documentation, coverage review, and partner conversations.
+      </p>
+
+      <div class="metricRow">
+        <div class="metric">
+          <div class="metricLabel">Compliance check locations</div>
+          <div class="metricValue">54</div>
+          <div class="metricNote">Mapped in the current layer</div>
+        </div>
+
+        <div class="metric">
+          <div class="metricLabel">Store audit locations</div>
+          <div class="metricValue">53</div>
+          <div class="metricNote">Mapped in the current layer</div>
+        </div>
+
+        <div class="metric">
+          <div class="metricLabel">Map layers</div>
+          <div class="metricValue">2</div>
+          <div class="metricNote">Compliance checks and store audits</div>
+        </div>
+
+        <div class="metric">
+          <div class="metricLabel">Last updated</div>
+          <div class="metricValue">Nov 18, 2025</div>
+          <div class="metricNote">Based on the current Google My Maps file</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="container gridTwo">
+    <div class="panel">
+      <h2>Why this matters</h2>
+      <p class="panelIntro">
+        Tobacco retail surveillance activities help document where checks and audits are occurring and support more informed planning across the county.
+      </p>
+
+      <div class="calloutGrid">
+        <div class="callout calloutOne">
+          <strong>Planning support</strong>
+          <p>This map can help staff review geographic coverage and identify areas that may need additional attention during future planning.</p>
+        </div>
+
+        <div class="callout calloutTwo">
+          <strong>Documentation</strong>
+          <p>The map provides a clear visual reference for sites included in compliance check and store audit tracking.</p>
+        </div>
+
+        <div class="callout calloutThree">
+          <strong>Partner communication</strong>
+          <p>The page can be shared as a simple visual summary when discussing tobacco retail monitoring activities with leadership or partners.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>How to use this map</h2>
+      <p class="panelIntro">
+        Use the map tools to zoom, search, and turn layers on or off. Click individual points to view location details.
+      </p>
+
+      <div class="legendRow">
+        <div class="legendItem">
+          <span class="dot dotBlue"></span>
+          Compliance check locations
+        </div>
+
+        <div class="legendItem">
+          <span class="dot dotGold"></span>
+          Store audit locations
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="container">
+    <div class="mapPanel">
+      <iframe
+        class="mapFrame"
+        src="https://www.google.com/maps/d/u/0/embed?mid=1xOu5nDnY5vgCYaelEpMeFXHYxugQZC4&ehbc=2E312F"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="container">
+    <div class="footerCard">
+      <span class="noteTitle">Interpretation note</span>
+      Mapped locations represent sites included in the current tracking file. This map should not be interpreted as a complete list of all tobacco retailers unless the source list has been confirmed as complete and current.
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
